@@ -1,0 +1,1870 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منظم المهام - خطة الألماني B1 والتفوق اليومي</title>
+    <!-- Fonts: Cairo & Tajawal -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-main: #0b0f19;
+            --bg-card: #151d2e;
+            --bg-card-hover: #1c273e;
+            --border-color: #26354f;
+            --border-focus: #3b82f6;
+            
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            
+            /* Category Colors */
+            --cat-german: #ec4899; /* German - Pink/Rose */
+            --cat-quran: #10b981;  /* Quran - Emerald */
+            --cat-study: #3b82f6;  /* Highschool - Blue */
+            --cat-workout: #f59e0b;/* Workout - Amber */
+            --cat-general: #8b5cf6;/* General - Purple */
+            
+            /* Priorities */
+            --prio-high: #ef4444;
+            --prio-med: #f59e0b;
+            --prio-low: #10b981;
+
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --shadow-glow: 0 0 25px rgba(59, 130, 246, 0.15);
+            --transition-fast: 0.2s ease;
+            --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', 'Tajawal', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(236, 72, 153, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 85% 25%, rgba(59, 130, 246, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 50% 80%, rgba(16, 185, 129, 0.06) 0%, transparent 50%);
+            background-attachment: fixed;
+            overflow-x: hidden;
+            padding-bottom: 40px;
+        }
+
+        /* App Header */
+        header {
+            background: rgba(21, 29, 46, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 16px 24px;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-md);
+            background: linear-gradient(135deg, #ec4899, #8b5cf6, #3b82f6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: white;
+            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+            animation: pulseGlow 4s infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3); }
+            100% { box-shadow: 0 4px 25px rgba(59, 130, 246, 0.5); }
+        }
+
+        .logo-text h1 {
+            font-size: 1.35rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(to left, #ffffff, #cbd5e1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-text p {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn-inject-plan {
+            background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 14px rgba(236, 72, 153, 0.4);
+            transition: var(--transition-smooth);
+        }
+
+        .btn-inject-plan:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(236, 72, 153, 0.6);
+            background: linear-gradient(135deg, #f43f5e 0%, #db2777 100%);
+        }
+
+        .btn-secondary-action {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            padding: 10px 14px;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition-fast);
+        }
+
+        .btn-secondary-action:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--text-secondary);
+        }
+
+        /* Layout Container */
+        .main-container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 24px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 340px 1fr;
+            gap: 24px;
+        }
+
+        @media (max-width: 960px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Sidebar Cards */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            box-shadow: var(--shadow-glow);
+            backdrop-filter: blur(10px);
+        }
+
+        .card-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .card-title i {
+            color: #3b82f6;
+        }
+
+        /* Progress Card */
+        .overall-progress-container {
+            margin-bottom: 16px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .progress-bar-bg {
+            width: 100%;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #ec4899, #8b5cf6, #10b981);
+            border-radius: 20px;
+            transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+        }
+
+        .progress-bar-fill::after {
+            content: '';
+            position: absolute;
+            top: 0; right: 0; bottom: 0; left: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .stat-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-md);
+            padding: 12px;
+            text-align: center;
+        }
+
+        .stat-val {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .stat-lbl {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+
+        /* German Strategy Mini Roadmap Widget */
+        .german-roadmap-box {
+            background: linear-gradient(145deg, rgba(236, 72, 153, 0.1), rgba(139, 92, 246, 0.08));
+            border: 1px solid rgba(236, 72, 153, 0.25);
+            border-radius: var(--radius-md);
+            padding: 16px;
+        }
+
+        .roadmap-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .roadmap-header i {
+            color: #ec4899;
+            font-size: 1.2rem;
+        }
+
+        .roadmap-header h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+
+        .roadmap-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 0.8rem;
+        }
+
+        .step-item {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 8px 10px;
+            border-radius: var(--radius-sm);
+            border-right: 3px solid #ec4899;
+        }
+
+        .step-item strong {
+            color: #f472b6;
+        }
+
+        /* Quick Routine Templates */
+        .template-btn-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .btn-tpl {
+            width: 100%;
+            padding: 10px 14px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-primary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+
+        .btn-tpl:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateX(-3px);
+        }
+
+        .btn-tpl span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Main Content Area */
+        .content-area {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Task Creation Box */
+        .add-task-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            box-shadow: var(--shadow-glow);
+        }
+
+        .add-task-form {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .input-row-main {
+            display: flex;
+            gap: 10px;
+        }
+
+        .task-input {
+            flex: 1;
+            background: rgba(11, 15, 25, 0.8);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 12px 16px;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            outline: none;
+            transition: var(--transition-fast);
+        }
+
+        .task-input:focus {
+            border-color: var(--border-focus);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+
+        .btn-add-submit {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            border: none;
+            padding: 0 24px;
+            border-radius: var(--radius-md);
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+            transition: var(--transition-smooth);
+            box-shadow: 0 4px 14px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-add-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
+            background: linear-gradient(135deg, #60a5fa 0%, #2563eb 100%);
+        }
+
+        .input-row-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr auto;
+            gap: 10px;
+        }
+
+        @media (max-width: 640px) {
+            .input-row-options {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .custom-select, .custom-input {
+            background: rgba(11, 15, 25, 0.8);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            padding: 8px 12px;
+            color: var(--text-primary);
+            font-size: 0.85rem;
+            outline: none;
+        }
+
+        .custom-select option {
+            background: var(--bg-card);
+            color: var(--text-primary);
+        }
+
+        /* Filter Controls & Search */
+        .controls-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 16px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .search-and-status {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            position: relative;
+            flex: 1;
+            min-width: 220px;
+        }
+
+        .search-box i {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .search-input {
+            width: 100%;
+            background: rgba(11, 15, 25, 0.6);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 9px 38px 9px 14px;
+            color: var(--text-primary);
+            font-size: 0.85rem;
+            outline: none;
+        }
+
+        .search-input:focus {
+            border-color: var(--border-focus);
+        }
+
+        .status-filters {
+            display: flex;
+            gap: 6px;
+            background: rgba(11, 15, 25, 0.6);
+            padding: 4px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-status-tab {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+
+        .btn-status-tab.active {
+            background: #3b82f6;
+            color: white;
+        }
+
+        /* Category Filter Tabs */
+        .category-tabs {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+            scrollbar-width: thin;
+        }
+
+        .category-tabs::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .category-tabs::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 4px;
+        }
+
+        .cat-tab {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition-fast);
+        }
+
+        .cat-tab:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-primary);
+        }
+
+        .cat-tab.active {
+            color: white;
+            border-color: transparent;
+        }
+
+        .cat-tab.active[data-cat="all"] { background: #64748b; }
+        .cat-tab.active[data-cat="german"] { background: var(--cat-german); box-shadow: 0 0 12px rgba(236, 72, 153, 0.4); }
+        .cat-tab.active[data-cat="quran"] { background: var(--cat-quran); box-shadow: 0 0 12px rgba(16, 185, 129, 0.4); }
+        .cat-tab.active[data-cat="study"] { background: var(--cat-study); box-shadow: 0 0 12px rgba(59, 130, 246, 0.4); }
+        .cat-tab.active[data-cat="workout"] { background: var(--cat-workout); box-shadow: 0 0 12px rgba(245, 158, 11, 0.4); }
+        .cat-tab.active[data-cat="general"] { background: var(--cat-general); box-shadow: 0 0 12px rgba(139, 92, 246, 0.4); }
+
+        .cat-badge-count {
+            background: rgba(0, 0, 0, 0.25);
+            padding: 2px 7px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+        }
+
+        /* Tasks List Container */
+        .tasks-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            min-height: 250px;
+        }
+
+        .empty-state {
+            background: var(--bg-card);
+            border: 2px dashed var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 40px 20px;
+            text-align: center;
+            color: var(--text-muted);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            color: rgba(255, 255, 255, 0.15);
+        }
+
+        .empty-state h3 {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        /* Task Card Component */
+        .task-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 16px 18px;
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .task-card::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 5px;
+            background: #64748b;
+        }
+
+        .task-card[data-category="german"]::before { background: var(--cat-german); }
+        .task-card[data-category="quran"]::before { background: var(--cat-quran); }
+        .task-card[data-category="study"]::before { background: var(--cat-study); }
+        .task-card[data-category="workout"]::before { background: var(--cat-workout); }
+        .task-card[data-category="general"]::before { background: var(--cat-general); }
+
+        .task-card:hover {
+            transform: translateY(-2px);
+            background: var(--bg-card-hover);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+        }
+
+        .task-card.completed {
+            opacity: 0.65;
+            background: rgba(15, 23, 42, 0.5);
+        }
+
+        .task-checkbox-wrapper {
+            margin-top: 2px;
+        }
+
+        .custom-checkbox {
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            border: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition-fast);
+            color: transparent;
+            background: rgba(11, 15, 25, 0.8);
+        }
+
+        .task-card:hover .custom-checkbox {
+            border-color: var(--text-secondary);
+        }
+
+        .task-card.completed .custom-checkbox {
+            background: #10b981;
+            border-color: #10b981;
+            color: white;
+        }
+
+        .task-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .task-header-line {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .task-title {
+            font-size: 0.98rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.4;
+            transition: var(--transition-fast);
+        }
+
+        .task-card.completed .task-title {
+            text-decoration: line-through;
+            color: var(--text-muted);
+        }
+
+        .task-badges {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .badge-cat-german { background: rgba(236, 72, 153, 0.15); color: #f472b6; border: 1px solid rgba(236, 72, 153, 0.3); }
+        .badge-cat-quran { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+        .badge-cat-study { background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3); }
+        .badge-cat-workout { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+        .badge-cat-general { background: rgba(139, 92, 246, 0.15); color: #c084fc; border: 1px solid rgba(139, 92, 246, 0.3); }
+
+        .badge-prio-high { background: rgba(239, 68, 68, 0.15); color: #f87171; }
+        .badge-prio-med { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
+        .badge-prio-low { background: rgba(16, 185, 129, 0.15); color: #34d399; }
+
+        .task-meta {
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .task-meta span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Sub-tasks list inside task */
+        .subtasks-box {
+            margin-top: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            background: rgba(0, 0, 0, 0.25);
+            padding: 10px 12px;
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .subtask-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+
+        .subtask-item.checked {
+            text-decoration: line-through;
+            color: var(--text-muted);
+        }
+
+        .subtask-checkbox {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+        }
+
+        .subtask-item.checked .subtask-checkbox {
+            background: #3b82f6;
+            border-color: #3b82f6;
+            color: white;
+        }
+
+        .task-actions {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-icon-action {
+            width: 32px;
+            height: 32px;
+            border-radius: var(--radius-sm);
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            transition: var(--transition-fast);
+        }
+
+        .btn-icon-action:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-primary);
+        }
+
+        .btn-icon-action.delete:hover {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+
+        /* Modal Overlay */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(6px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            max-width: 550px;
+            width: 100%;
+            padding: 24px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-overlay.active .modal-box {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .modal-title {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-close-modal {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .btn-close-modal:hover {
+            color: var(--text-primary);
+        }
+
+        /* Toast notifications */
+        .toast-container {
+            position: fixed;
+            bottom: 24px;
+            left: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 2000;
+        }
+
+        .toast {
+            background: rgba(21, 29, 46, 0.95);
+            border: 1px solid var(--border-color);
+            color: white;
+            padding: 12px 20px;
+            border-radius: var(--radius-md);
+            font-size: 0.88rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+            animation: slideIn 0.3s forwards ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Confetti canvas overlay */
+        #confettiCanvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="confettiCanvas"></canvas>
+
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo-area">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>منظم المهام والسرعة الـ B1</h1>
+                    <p>خطة الألماني السريعة المكثفة + القرآن والدراسة والرياضة</p>
+                </div>
+            </div>
+            
+            <div class="header-actions">
+                <button class="btn-inject-plan" id="btnInjectPlan">
+                    <i class="fa-solid fa-bolt"></i>
+                    <span>تنزيل خطة الألمانية الأسبوعية</span>
+                </button>
+                
+                <button class="btn-secondary-action" id="btnShowInfoModal">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span>استراتيجية الـ B1</span>
+                </button>
+
+                <button class="btn-secondary-action" id="btnClearCompleted" title="مسح المهام المكتملة">
+                    <i class="fa-solid fa-trash-can"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+
+        <!-- Sidebar Section -->
+        <aside class="sidebar">
+            
+            <!-- Progress & Stats Card -->
+            <div class="card">
+                <div class="card-title">
+                    <span><i class="fa-solid fa-chart-pie"></i> نسبة الإنجاز اليومي</span>
+                    <span id="percentText" style="color: #3b82f6; font-size: 1.1rem; font-weight: 800;">0%</span>
+                </div>
+                
+                <div class="overall-progress-container">
+                    <div class="progress-header">
+                        <span>المهام المنجزة</span>
+                        <span id="taskRatioText">0 من 0</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar-fill" id="progressBarFill"></div>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-val" id="statGermanCount" style="color: #ec4899;">0</div>
+                        <div class="stat-lbl">مهام الألمانية</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-val" id="statQuranCount" style="color: #10b981;">0</div>
+                        <div class="stat-lbl">مهام القرآن</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-val" id="statStudyCount" style="color: #3b82f6;">0</div>
+                        <div class="stat-lbl">مهام الدراسة</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-val" id="statWorkoutCount" style="color: #f59e0b;">0</div>
+                        <div class="stat-lbl">مهام التمرين</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- German Strategy Box -->
+            <div class="german-roadmap-box">
+                <div class="roadmap-header">
+                    <i class="fa-solid fa-fire"></i>
+                    <h4>خطة الألماني المكثفة (Fast-Track)</h4>
+                </div>
+                <div class="roadmap-steps">
+                    <div class="step-item">
+                        <div>
+                            <strong>الوقت اليومي:</strong> 60 - 75 دقيقة (4-5 أيام/أسبوع).
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div>
+                            <strong>التقسيمة (75 دقيقة):</strong> 10د مراجعة + 35د (2-3 دروس DW) + 20د (فيديو شحاتة) + 10د حفظ 15 كلمة.
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div>
+                            <strong>الشهر 1 - 1.5:</strong> تقفيل Nicos Weg A2 + قواعد الماضي والروابط.
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div>
+                            <strong>الشهر 1.5 - 3:</strong> Nicos Weg B1 + Redemittel + القواعد المتقدمة.
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div>
+                            <strong>الشهر 4:</strong> نماذج جوتة (Modelltests) + Sprechen & Schreiben.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Templates Card -->
+            <div class="card">
+                <div class="card-title">
+                    <span><i class="fa-solid fa-wand-magic-sparkles"></i> قوالب مهام سريعة</span>
+                </div>
+                <div class="template-btn-list">
+                    <button class="btn-tpl" data-tpl="german_daily">
+                        <span><i class="fa-solid fa-language" style="color: #ec4899;"></i> سيشن ألماني مكثف (75د)</span>
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                    <button class="btn-tpl" data-tpl="quran_daily">
+                        <span><i class="fa-solid fa-book-quran" style="color: #10b981;"></i> ورد القرآن (حفظ + مراجعة)</span>
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                    <button class="btn-tpl" data-tpl="study_daily">
+                        <span><i class="fa-solid fa-book-open" style="color: #3b82f6;"></i> جلسة مذاكرة تخصصية</span>
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                    <button class="btn-tpl" data-tpl="workout_daily">
+                        <span><i class="fa-solid fa-dumbbell" style="color: #f59e0b;"></i> حصة تمرين بدني</span>
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+
+        </aside>
+
+        <!-- Main Content Section -->
+        <main class="content-area">
+
+            <!-- Add Task Form -->
+            <div class="add-task-card">
+                <form class="add-task-form" id="addTaskForm">
+                    <div class="input-row-main">
+                        <input type="text" id="taskTitle" class="task-input" placeholder="أضف مهمة جديدة هنا (مثال: دراسة 3 دروس DW Nicos Weg)..." required>
+                        <button type="submit" class="btn-add-submit">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>إضافة</span>
+                        </button>
+                    </div>
+
+                    <div class="input-row-options">
+                        <select id="taskCategory" class="custom-select">
+                            <option value="german">🇩🇪 ألماني</option>
+                            <option value="quran">📖 قرآن</option>
+                            <option value="study" selected>🎓 دراسة</option>
+                            <option value="workout">🏋️ تمرين</option>
+                            <option value="general">📌 عام</option>
+                        </select>
+
+                        <select id="taskPriority" class="custom-select">
+                            <option value="high">🔴 أولوية عالية</option>
+                            <option value="med" selected>🟡 أولوية متوسطة</option>
+                            <option value="low">🟢 أولوية منخفضة</option>
+                        </select>
+
+                        <input type="text" id="taskDuration" class="custom-input" placeholder="المدة (مثال: 30 دقيقة)">
+                        <input type="text" id="taskDay" class="custom-input" placeholder="اليوم / الموعد">
+                    </div>
+                </form>
+            </div>
+
+            <!-- Filters Bar -->
+            <div class="controls-card">
+                <div class="search-and-status">
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="searchInput" class="search-input" placeholder="ابحث عن مهمة...">
+                    </div>
+
+                    <div class="status-filters">
+                        <button class="btn-status-tab active" data-status="all">الكل</button>
+                        <button class="btn-status-tab" data-status="active">قيد التنفيذ</button>
+                        <button class="btn-status-tab" data-status="completed">المكتملة</button>
+                    </div>
+                </div>
+
+                <!-- Category Tabs -->
+                <div class="category-tabs">
+                    <button class="cat-tab active" data-cat="all">
+                        <span>الكل</span>
+                        <span class="cat-badge-count" id="cntAll">0</span>
+                    </button>
+                    <button class="cat-tab" data-cat="german">
+                        <span>🇩🇪 ألماني</span>
+                        <span class="cat-badge-count" id="cntGerman">0</span>
+                    </button>
+                    <button class="cat-tab" data-cat="quran">
+                        <span>📖 قرآن</span>
+                        <span class="cat-badge-count" id="cntQuran">0</span>
+                    </button>
+                    <button class="cat-tab" data-cat="study">
+                        <span>🎓 دراسة</span>
+                        <span class="cat-badge-count" id="cntStudy">0</span>
+                    </button>
+                    <button class="cat-tab" data-cat="workout">
+                        <span>🏋️ تمرين</span>
+                        <span class="cat-badge-count" id="cntWorkout">0</span>
+                    </button>
+                    <button class="cat-tab" data-cat="general">
+                        <span>📌 عام</span>
+                        <span class="cat-badge-count" id="cntGeneral">0</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tasks List -->
+            <div class="tasks-container" id="tasksList">
+                <!-- JS will populate tasks here -->
+            </div>
+
+        </main>
+    </div>
+
+    <!-- German Strategy Info Modal -->
+    <div class="modal-overlay" id="infoModal">
+        <div class="modal-box">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i class="fa-solid fa-rocket" style="color: #ec4899;"></i>
+                    <span>دليل خطة الألماني الفائقة للوصول إلى B1</span>
+                </div>
+                <button class="btn-close-modal" id="btnCloseInfoModal">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div style="font-size: 0.9rem; line-height: 1.7; color: var(--text-secondary); display: flex; flex-direction: column; gap: 14px;">
+                <p>أهلاً بك! في خلال 3 إلى 4 أشهر، يمكنك الانتقال بثبات وسرعة من مستوى A2 إلى إنهاء B1 بامتياز وتجهيز فورمة امتحانات جوتة، وذلك بالالتزام بتكتيك <strong>Fast-Track</strong>:</p>
+                
+                <div style="background: rgba(236, 72, 153, 0.1); border-right: 3px solid #ec4899; padding: 12px; border-radius: 6px; color: var(--text-primary);">
+                    <strong>⏱️ تقسيم الـ 75 دقيقة اليومية (4-5 أيام أسبوعياً):</strong>
+                    <ul style="margin-right: 20px; margin-top: 6px;">
+                        <li><strong>10 دقائق:</strong> مراجعة سريعة جداً على كلمات اليوم السابق.</li>
+                        <li><strong>35 دقيقة:</strong> إنجاز 2 إلى 3 دروس تفاعلية على DW Nicos Weg.</li>
+                        <li><strong>20 دقيقة:</strong> مشاهدة فيديو القاعدة المقابلة عند مستر شحاتة وتلخيصها.</li>
+                        <li><strong>10 دقائق:</strong> حفظ 10-15 كلمة جديدة بالأداة والجمع.</li>
+                    </ul>
+                </div>
+
+                <div style="background: rgba(59, 130, 246, 0.1); border-right: 3px solid #3b82f6; padding: 12px; border-radius: 6px; color: var(--text-primary);">
+                    <strong>🗓️ الجدول الزمني السريع (4 أشهر):</strong>
+                    <ul style="margin-right: 20px; margin-top: 6px;">
+                        <li><strong>الشهر 1 - 1.5:</strong> تقفيل Nicos Weg A2 + قواعد الماضي (Perfekt/Präteritum) والروابط (weil, dass, wenn) والأفعال المنفصلة.</li>
+                        <li><strong>الشهر 1.5 - 3:</strong> قطع شوط B1 (Nicos Weg B1 + Redemittel + Relativsätze, Passiv, Konjunktiv II, Verben mit Präpositionen).</li>
+                        <li><strong>الشهر 4:</strong> فورمة امتحانات جوتة (Modelltests B1) وتدريبات التحدث والكتابة (Schreiben & Sprechen).</li>
+                    </ul>
+                </div>
+
+                <button class="btn-inject-plan" id="btnModalInject" style="justify-content: center; margin-top: 8px;">
+                    <i class="fa-solid fa-bolt"></i>
+                    <span>تنزيل خطة الألمانية الأسبوعية الآن</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Application Script -->
+    <script>
+        // Data Store & Initial State
+        const STORAGE_KEY = 'german_prep_todo_tasks_v2';
+        
+        let tasks = [];
+        let currentCategoryFilter = 'all';
+        let currentStatusFilter = 'all';
+        let searchQuery = '';
+
+        // Web Audio Synthesizer for subtle feedback sound
+        function playTone(freq, type = 'sine', duration = 0.15) {
+            try {
+                const AudioCtx = window.AudioContext || window.webkitAudioContext;
+                if (!AudioCtx) return;
+                const ctx = new AudioCtx();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = type;
+                osc.frequency.setValueAtTime(freq, ctx.currentTime);
+                gain.gain.setValueAtTime(0.1, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                osc.stop(ctx.currentTime + duration);
+            } catch (e) {
+                // Audio context block ignored
+            }
+        }
+
+        // Default Initial Tasks (Pre-loaded if localStorage is empty)
+        const initialTasks = [
+            {
+                id: 'init-1',
+                title: '🇩🇪 ألمانيا DW: إنجاز 3 دروس تفاعلية في Nicos Weg A2',
+                category: 'german',
+                priority: 'high',
+                duration: '35 دقيقة',
+                day: 'اليوم الأول',
+                completed: false,
+                subtasks: [
+                    { id: 's1', text: 'الدرس الأول والتفاعل مع التمارين', completed: false },
+                    { id: 's2', text: 'الدرس الثاني وحفظ مفردات المواقف', completed: false },
+                    { id: 's3', text: 'الدرس الثالث وإعادة التسميع', completed: false }
+                ]
+            },
+            {
+                id: 'init-2',
+                title: '🇩🇪 قواعد مستر شحاتة: مشاهدة درس (Nebensätze: weil, dass, wenn) وتلخيصه',
+                category: 'german',
+                priority: 'high',
+                duration: '20 دقيقة',
+                day: 'اليوم الأول',
+                completed: false,
+                subtasks: []
+            },
+            {
+                id: 'init-3',
+                title: '📖 ورد القرآن اليومي: حفظ صفحة جديدة + مراجعة جزء',
+                category: 'quran',
+                priority: 'high',
+                duration: '45 دقيقة',
+                day: 'يومي',
+                completed: false,
+                subtasks: []
+            },
+            {
+                id: 'init-4',
+                title: '🎓 دراسة الثانوية: حل تمارين الرياضيات / الفيزيا المكثفة',
+                category: 'study',
+                priority: 'med',
+                duration: '60 دقيقة',
+                day: 'اليوم',
+                completed: false,
+                subtasks: []
+            },
+            {
+                id: 'init-5',
+                title: '🏋️ حصة التمرين البدني اليومي (Cardio / Strength)',
+                category: 'workout',
+                priority: 'med',
+                duration: '40 دقيقة',
+                day: 'اليوم',
+                completed: false,
+                subtasks: []
+            }
+        ];
+
+        // 5-Day Weekly German Fast-Track Plan Template
+        const germanWeeklyFastTrackPlan = [
+            {
+                title: '🇩🇪 ألماني [اليوم 1]: DW Nicos Weg A2 (دروس 1-3) + قواعد الروابط (weil, dass)',
+                category: 'german',
+                priority: 'high',
+                duration: '75 دقيقة',
+                day: 'الأحد / اليوم 1',
+                completed: false,
+                subtasks: [
+                    { id: 'gw1_1', text: '10 دقائق: مراجعة كلمات اليوم السابق', completed: false },
+                    { id: 'gw1_2', text: '35 دقيقة: حل 3 دروس DW Nicos Weg A2', completed: false },
+                    { id: 'gw1_3', text: '20 دقيقة: فيديو شحاتة (Nebensätze weil / dass)', completed: false },
+                    { id: 'gw1_4', text: '10 دقائق: حفظ 15 كلمة جديدة بالأداة والجمع', completed: false }
+                ]
+            },
+            {
+                title: '🇩🇪 ألماني [اليوم 2]: DW Nicos Weg A2 (دروس 4-6) + قواعد الماضي (Perfekt)',
+                category: 'german',
+                priority: 'high',
+                duration: '75 دقيقة',
+                day: 'الإثنين / اليوم 2',
+                completed: false,
+                subtasks: [
+                    { id: 'gw2_1', text: '10 دقائق: مراجعة الكلمات السابقة', completed: false },
+                    { id: 'gw2_2', text: '35 دقيقة: 3 دروس تفاعلية DW', completed: false },
+                    { id: 'gw2_3', text: '20 دقيقة: فيديو شحاتة زمن الماضي Perfekt مع haben/sein', completed: false },
+                    { id: 'gw2_4', text: '10 دقائق: حفظ 15 مفردة جديدة', completed: false }
+                ]
+            },
+            {
+                title: '🇩🇪 ألماني [اليوم 3]: DW Nicos Weg A2 (دروس 7-9) + الأفعال المنفصلة (Trennbare Verben)',
+                category: 'german',
+                priority: 'high',
+                duration: '75 دقيقة',
+                day: 'الثلاثاء / اليوم 3',
+                completed: false,
+                subtasks: [
+                    { id: 'gw3_1', text: '10 دقائق: مراجعة الكلمات والتعابير', completed: false },
+                    { id: 'gw3_2', text: '35 دقيقة: 3 دروس جديدة DW', completed: false },
+                    { id: 'gw3_3', text: '20 دقيقة: فيديو شحاتة الأفعال المنفصلة وتلخيصه', completed: false },
+                    { id: 'gw3_4', text: '10 دقائق: حفظ 15 كلمة جديدة', completed: false }
+                ]
+            },
+            {
+                title: '🇩🇪 ألماني [اليوم 4]: DW Nicos Weg A2 (دروس 10-12) + قواعد الروابط الشرطية (wenn)',
+                category: 'german',
+                priority: 'high',
+                duration: '75 دقيقة',
+                day: 'الأربعاء / اليوم 4',
+                completed: false,
+                subtasks: [
+                    { id: 'gw4_1', text: '10 دقائق: مراجعة كلمات وقواعد', completed: false },
+                    { id: 'gw4_2', text: '35 دقيقة: 3 دروس جديدة DW', completed: false },
+                    { id: 'gw4_3', text: '20 دقيقة: فيديو شحاتة (الجمل الجانبية wenn)', completed: false },
+                    { id: 'gw4_4', text: '10 دقائق: حفظ 15 كلمة جديدة', completed: false }
+                ]
+            },
+            {
+                title: '🇩🇪 ألماني [اليوم 5]: مراجعة أسبوعية شاملة + حفظ التعبيرات الجاهزة (Redemittel A2/B1)',
+                category: 'german',
+                priority: 'high',
+                duration: '75 دقيقة',
+                day: 'الخميس / اليوم 5',
+                completed: false,
+                subtasks: [
+                    { id: 'gw5_1', text: '20 دقيقة: مراجعة جميع كلمات وقواعد الأسبوع', completed: false },
+                    { id: 'gw5_2', text: '30 دقيقة: كتابة إيميل بسيط وتطبيق Redemittel', completed: false },
+                    { id: 'gw5_3', text: '25 دقيقة: الاستماع لمقطع صوتي وتدريب النطق', completed: false }
+                ]
+            }
+        ];
+
+        // Load & Save Persistence
+        function loadTasks() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved) {
+                try {
+                    tasks = JSON.parse(saved);
+                } catch (e) {
+                    tasks = [...initialTasks];
+                }
+            } else {
+                tasks = [...initialTasks];
+            }
+        }
+
+        function saveTasks() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+            render();
+        }
+
+        // DOM Element Selectors
+        const tasksListEl = document.getElementById('tasksList');
+        const addTaskForm = document.getElementById('addTaskForm');
+        const taskTitleInput = document.getElementById('taskTitle');
+        const taskCategoryInput = document.getElementById('taskCategory');
+        const taskPriorityInput = document.getElementById('taskPriority');
+        const taskDurationInput = document.getElementById('taskDuration');
+        const taskDayInput = document.getElementById('taskDay');
+        const searchInput = document.getElementById('searchInput');
+
+        const btnInjectPlan = document.getElementById('btnInjectPlan');
+        const btnShowInfoModal = document.getElementById('btnShowInfoModal');
+        const btnCloseInfoModal = document.getElementById('btnCloseInfoModal');
+        const infoModal = document.getElementById('infoModal');
+        const btnModalInject = document.getElementById('btnModalInject');
+        const btnClearCompleted = document.getElementById('btnClearCompleted');
+
+        // Progress indicators
+        const percentText = document.getElementById('percentText');
+        const taskRatioText = document.getElementById('taskRatioText');
+        const progressBarFill = document.getElementById('progressBarFill');
+
+        const cntAll = document.getElementById('cntAll');
+        const cntGerman = document.getElementById('cntGerman');
+        const cntQuran = document.getElementById('cntQuran');
+        const cntStudy = document.getElementById('cntStudy');
+        const cntWorkout = document.getElementById('cntWorkout');
+        const cntGeneral = document.getElementById('cntGeneral');
+
+        const statGermanCount = document.getElementById('statGermanCount');
+        const statQuranCount = document.getElementById('statQuranCount');
+        const statStudyCount = document.getElementById('statStudyCount');
+        const statWorkoutCount = document.getElementById('statWorkoutCount');
+
+        // Toast Helper
+        function showToast(message, icon = 'fa-check-circle') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerHTML = `<i class="fa-solid ${icon}" style="color: #3b82f6;"></i> <span>${message}</span>`;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(-100%)';
+                toast.style.transition = '0.3s ease';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // Render Application UI
+        function render() {
+            updateStatsAndProgress();
+            renderTasks();
+        }
+
+        function updateStatsAndProgress() {
+            const total = tasks.length;
+            const completed = tasks.filter(t => t.completed).length;
+            const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
+
+            percentText.textContent = `${percent}%`;
+            taskRatioText.textContent = `${completed} من ${total}`;
+            progressBarFill.style.width = `${percent}%`;
+
+            // Category Counts
+            cntAll.textContent = tasks.length;
+            cntGerman.textContent = tasks.filter(t => t.category === 'german').length;
+            cntQuran.textContent = tasks.filter(t => t.category === 'quran').length;
+            cntStudy.textContent = tasks.filter(t => t.category === 'study').length;
+            cntWorkout.textContent = tasks.filter(t => t.category === 'workout').length;
+            cntGeneral.textContent = tasks.filter(t => t.category === 'general').length;
+
+            statGermanCount.textContent = tasks.filter(t => t.category === 'german' && t.completed).length + '/' + cntGerman.textContent;
+            statQuranCount.textContent = tasks.filter(t => t.category === 'quran' && t.completed).length + '/' + cntQuran.textContent;
+            statStudyCount.textContent = tasks.filter(t => t.category === 'study' && t.completed).length + '/' + cntStudy.textContent;
+            statWorkoutCount.textContent = tasks.filter(t => t.category === 'workout' && t.completed).length + '/' + cntWorkout.textContent;
+        }
+
+        function renderTasks() {
+            tasksListEl.innerHTML = '';
+
+            // Filter logic
+            let filtered = tasks.filter(t => {
+                // Category filter
+                if (currentCategoryFilter !== 'all' && t.category !== currentCategoryFilter) return false;
+
+                // Status filter
+                if (currentStatusFilter === 'active' && t.completed) return false;
+                if (currentStatusFilter === 'completed' && !t.completed) return false;
+
+                // Search query
+                if (searchQuery.trim() !== '') {
+                    const q = searchQuery.toLowerCase();
+                    const matchTitle = t.title.toLowerCase().includes(q);
+                    const matchDay = t.day && t.day.toLowerCase().includes(q);
+                    return matchTitle || matchDay;
+                }
+
+                return true;
+            });
+
+            if (filtered.length === 0) {
+                tasksListEl.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fa-solid fa-clipboard-list"></i>
+                        <h3>لا توجد مهام مطابقة حالياً</h3>
+                        <p style="font-size: 0.85rem;">أضف مهمة جديدة أو قم بتنزيل الخطة الألمانية للبدء!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            filtered.forEach(task => {
+                const card = document.createElement('div');
+                card.className = `task-card ${task.completed ? 'completed' : ''}`;
+                card.setAttribute('data-category', task.category);
+
+                // Category Text & Badges
+                let catLabel = 'عام';
+                let catBadgeClass = 'badge-cat-general';
+                if (task.category === 'german') { catLabel = '🇩🇪 ألماني'; catBadgeClass = 'badge-cat-german'; }
+                else if (task.category === 'quran') { catLabel = '📖 قرآن'; catBadgeClass = 'badge-cat-quran'; }
+                else if (task.category === 'study') { catLabel = '🎓 دراسة'; catBadgeClass = 'badge-cat-study'; }
+                else if (task.category === 'workout') { catLabel = '🏋️ تمرين'; catBadgeClass = 'badge-cat-workout'; }
+
+                let prioLabel = 'عالية';
+                let prioBadgeClass = 'badge-prio-high';
+                if (task.priority === 'med') { prioLabel = 'متوسطة'; prioBadgeClass = 'badge-prio-med'; }
+                else if (task.priority === 'low') { prioLabel = 'منخفضة'; prioBadgeClass = 'badge-prio-low'; }
+
+                // Subtasks HTML
+                let subtasksHtml = '';
+                if (task.subtasks && task.subtasks.length > 0) {
+                    subtasksHtml = `<div class="subtasks-box">`;
+                    task.subtasks.forEach(st => {
+                        subtasksHtml += `
+                            <div class="subtask-item ${st.completed ? 'checked' : ''}" onclick="toggleSubtask('${task.id}', '${st.id}')">
+                                <div class="subtask-checkbox">${st.completed ? '<i class="fa-solid fa-check"></i>' : ''}</div>
+                                <span>${st.text}</span>
+                            </div>
+                        `;
+                    });
+                    subtasksHtml += `</div>`;
+                }
+
+                card.innerHTML = `
+                    <div class="task-checkbox-wrapper">
+                        <div class="custom-checkbox" onclick="toggleTask('${task.id}')">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="task-content">
+                        <div class="task-header-line">
+                            <span class="task-title">${task.title}</span>
+                            <div class="task-badges">
+                                <span class="badge ${catBadgeClass}">${catLabel}</span>
+                                <span class="badge ${prioBadgeClass}">${prioLabel}</span>
+                            </div>
+                        </div>
+
+                        <div class="task-meta">
+                            ${task.duration ? `<span><i class="fa-regular fa-clock"></i> ${task.duration}</span>` : ''}
+                            ${task.day ? `<span><i class="fa-regular fa-calendar-days"></i> ${task.day}</span>` : ''}
+                        </div>
+
+                        ${subtasksHtml}
+                    </div>
+
+                    <div class="task-actions">
+                        <button class="btn-icon-action delete" onclick="deleteTask('${task.id}')" title="حذف المهمة">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+
+                tasksListEl.appendChild(card);
+            });
+        }
+
+        // Toggle Task Completion
+        window.toggleTask = function(id) {
+            const task = tasks.find(t => t.id === id);
+            if (task) {
+                task.completed = !task.completed;
+                if (task.completed) {
+                    playTone(600, 'sine', 0.2);
+                    showToast('تم إنجاز المهمة بنجاح! 👏');
+                    
+                    // Check if all completed for confetti
+                    if (tasks.length > 0 && tasks.every(t => t.completed)) {
+                        triggerConfetti();
+                    }
+                } else {
+                    playTone(300, 'sine', 0.1);
+                }
+                saveTasks();
+            }
+        };
+
+        // Toggle Subtask Completion
+        window.toggleSubtask = function(taskId, subtaskId) {
+            const task = tasks.find(t => t.id === taskId);
+            if (task && task.subtasks) {
+                const sub = task.subtasks.find(s => s.id === subtaskId);
+                if (sub) {
+                    sub.completed = !sub.completed;
+                    playTone(500, 'sine', 0.1);
+                    saveTasks();
+                }
+            }
+        };
+
+        // Delete Task
+        window.deleteTask = function(id) {
+            tasks = tasks.filter(t => t.id !== id);
+            playTone(200, 'triangle', 0.1);
+            showToast('تم حذف المهمة');
+            saveTasks();
+        };
+
+        // Add New Task Handlers
+        addTaskForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const title = taskTitleInput.value.trim();
+            if (!title) return;
+
+            const newTask = {
+                id: 'task-' + Date.now(),
+                title: title,
+                category: taskCategoryInput.value,
+                priority: taskPriorityInput.value,
+                duration: taskDurationInput.value.trim(),
+                day: taskDayInput.value.trim(),
+                completed: false,
+                subtasks: []
+            };
+
+            tasks.unshift(newTask);
+            taskTitleInput.value = '';
+            taskDurationInput.value = '';
+            taskDayInput.value = '';
+            
+            playTone(440, 'sine', 0.15);
+            showToast('تمت إضافة المهمة بنجاح');
+            saveTasks();
+        });
+
+        // Inject Fast-Track German Routine
+        function injectGermanPlan() {
+            // Check if already injected to avoid duplicating
+            const existingPlanTitles = tasks.map(t => t.title);
+            let addedCount = 0;
+
+            germanWeeklyFastTrackPlan.forEach((planItem, index) => {
+                const uniqueTitle = planItem.title;
+                const exists = existingPlanTitles.some(t => t.includes(planItem.day));
+                
+                if (!exists) {
+                    tasks.unshift({
+                        ...planItem,
+                        id: 'german-plan-' + Date.now() + '-' + index,
+                        subtasks: planItem.subtasks.map(s => ({ ...s }))
+                    });
+                    addedCount++;
+                }
+            });
+
+            if (addedCount > 0) {
+                triggerConfetti();
+                playTone(800, 'sine', 0.3);
+                showToast(`تم تنزيل خطة الألمانية (خطة الـ 5 أيام Fast-Track)! 🚀`);
+                saveTasks();
+            } else {
+                showToast('الخطة موجودة بالفعل في قائمتك!', 'fa-info-circle');
+            }
+        }
+
+        btnInjectPlan.addEventListener('click', injectGermanPlan);
+        btnModalInject.addEventListener('click', () => {
+            injectGermanPlan();
+            infoModal.classList.remove('active');
+        });
+
+        // Clear Completed Tasks
+        btnClearCompleted.addEventListener('click', () => {
+            const countCompleted = tasks.filter(t => t.completed).length;
+            if (countCompleted === 0) {
+                showToast('لا توجد مهام مكتملة لحذفها', 'fa-info-circle');
+                return;
+            }
+            if (confirm(`هل أنت تأكد من حذف ${countCompleted} مهام مكتملة؟`)) {
+                tasks = tasks.filter(t => !t.completed);
+                showToast('تم تنظيف القائمة من المهام المكتملة');
+                saveTasks();
+            }
+        });
+
+        // Template Quick Add Buttons
+        document.querySelectorAll('.btn-tpl').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tpl = btn.getAttribute('data-tpl');
+                let tTask = null;
+
+                if (tpl === 'german_daily') {
+                    tTask = {
+                        id: 'tpl-' + Date.now(),
+                        title: '🇩🇪 سيشن ألماني مكثف (DW 3 دروس + شحاتة قواعد + حفظ 15 كلمة)',
+                        category: 'german',
+                        priority: 'high',
+                        duration: '75 دقيقة',
+                        day: 'اليوم',
+                        completed: false,
+                        subtasks: [
+                            { id: 'st1', text: '10د: مراجعة كلمات اليوم السابق', completed: false },
+                            { id: 'st2', text: '35د: 2-3 دروس DW Nicos Weg', completed: false },
+                            { id: 'st3', text: '20د: فيديو القاعدة شحاتة وتلخيصها', completed: false },
+                            { id: 'st4', text: '10د: حفظ 15 كلمة جديدة بالأداة والجمع', completed: false }
+                        ]
+                    };
+                } else if (tpl === 'quran_daily') {
+                    tTask = {
+                        id: 'tpl-' + Date.now(),
+                        title: '📖 ورد القرآن اليومي: حفظ + تثبيت ومراجعة',
+                        category: 'quran',
+                        priority: 'high',
+                        duration: '45 دقيقة',
+                        day: 'يومي',
+                        completed: false,
+                        subtasks: [
+                            { id: 'qs1', text: 'حفظ الصفحة الجديدة بالتجويد', completed: false },
+                            { id: 'qs2', text: 'مراجعة الجزء/الماضي القريب', completed: false }
+                        ]
+                    };
+                } else if (tpl === 'study_daily') {
+                    tTask = {
+                        id: 'tpl-' + Date.now(),
+                        title: '🎓 جلسة مذاكرة ثانوية: مادة التخصص حل وتمارين',
+                        category: 'study',
+                        priority: 'med',
+                        duration: '60 دقيقة',
+                        day: 'اليوم',
+                        completed: false,
+                        subtasks: []
+                    };
+                } else if (tpl === 'workout_daily') {
+                    tTask = {
+                        id: 'tpl-' + Date.now(),
+                        title: '🏋️ تمرين بدني: لياقة وتنشيط بدني',
+                        category: 'workout',
+                        priority: 'med',
+                        duration: '40 دقيقة',
+                        day: 'اليوم',
+                        completed: false,
+                        subtasks: []
+                    };
+                }
+
+                if (tTask) {
+                    tasks.unshift(tTask);
+                    playTone(520, 'sine', 0.15);
+                    showToast('تم إضافة القالب للقائمة بنجاح');
+                    saveTasks();
+                }
+            });
+        });
+
+        // Filter Tabs Click Events
+        document.querySelectorAll('.cat-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                currentCategoryFilter = tab.getAttribute('data-cat');
+                render();
+            });
+        });
+
+        document.querySelectorAll('.btn-status-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.btn-status-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                currentStatusFilter = tab.getAttribute('data-status');
+                render();
+            });
+        });
+
+        searchInput.addEventListener('input', (e) => {
+            searchQuery = e.target.value;
+            render();
+        });
+
+        // Info Modal Handlers
+        btnShowInfoModal.addEventListener('click', () => infoModal.classList.add('active'));
+        btnCloseInfoModal.addEventListener('click', () => infoModal.classList.remove('active'));
+        infoModal.addEventListener('click', (e) => {
+            if (e.target === infoModal) infoModal.classList.remove('active');
+        });
+
+        // Simple Canvas Confetti Animation
+        function triggerConfetti() {
+            const canvas = document.getElementById('confettiCanvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const particles = [];
+            const colors = ['#ec4899', '#3b82f6', '#10b981', '#f59e0b', '#8b5cf6', '#ffffff'];
+
+            for (let i = 0; i < 90; i++) {
+                particles.push({
+                    x: canvas.width / 2,
+                    y: canvas.height / 2,
+                    vx: (Math.random() - 0.5) * 12,
+                    vy: (Math.random() - 0.7) * 14,
+                    size: Math.random() * 8 + 4,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    alpha: 1,
+                    decay: Math.random() * 0.02 + 0.015
+                });
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                let alive = false;
+
+                particles.forEach(p => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.vy += 0.25; // gravity
+                    p.alpha -= p.decay;
+
+                    if (p.alpha > 0) {
+                        alive = true;
+                        ctx.save();
+                        ctx.globalAlpha = p.alpha;
+                        ctx.fillStyle = p.color;
+                        ctx.fillRect(p.x, p.y, p.size, p.size);
+                        ctx.restore();
+                    }
+                });
+
+                if (alive) {
+                    requestAnimationFrame(animate);
+                } else {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                }
+            }
+
+            animate();
+        }
+
+        // Initialize on load
+        loadTasks();
+        render();
+    </script>
+</body>
+</html>
