@@ -125,6 +125,10 @@
             gap: 12px;
         }
 
+        .user-dropdown-wrapper {
+            position: relative;
+        }
+
         .user-badge-selector {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid var(--border-color);
@@ -140,6 +144,80 @@
         .user-badge-selector:hover {
             background: rgba(255, 255, 255, 0.1);
             border-color: var(--border-highlight);
+        }
+
+        .user-dropdown-menu {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            width: 240px;
+            background: #131b2e;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            z-index: 1000;
+        }
+
+        .user-dropdown-menu.show {
+            display: flex;
+        }
+
+        .dropdown-header {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            padding: 6px 10px;
+            font-weight: 600;
+        }
+
+        .user-dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 10px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+
+        .user-dropdown-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .user-dropdown-item.active {
+            background: rgba(59, 130, 246, 0.15);
+            border: 1px solid var(--border-highlight);
+        }
+
+        .avatar-circle.sm {
+            width: 26px;
+            height: 26px;
+            font-size: 0.8rem;
+        }
+
+        .user-dropdown-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-dropdown-name {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .user-dropdown-sub {
+            font-size: 0.72rem;
+            color: var(--text-secondary);
+        }
+
+        .user-dropdown-divider {
+            height: 1px;
+            background: var(--border-color);
+            margin: 4px 0;
         }
 
         .avatar-circle {
@@ -820,14 +898,46 @@
             </div>
 
             <div class="header-actions">
-                <!-- User Profile Switcher -->
-                <div class="user-badge-selector" onclick="openWizardModal()">
-                    <div class="avatar-circle" id="userAvatarCircle">م</div>
-                    <div class="user-info-text">
-                        <span class="user-name-label" id="headerUserName">محمد أحمد</span>
-                        <span class="user-status-sub" id="headerUserStatus">مستوى A1 مخصص</span>
+                <!-- User Profile Switcher Dropdown -->
+                <div class="user-dropdown-wrapper">
+                    <div class="user-badge-selector" id="userBadgeSelector" onclick="toggleUserDropdown(event)">
+                        <div class="avatar-circle" id="userAvatarCircle">م</div>
+                        <div class="user-info-text">
+                            <span class="user-name-label" id="headerUserName">محمد أحمد</span>
+                            <span class="user-status-sub" id="headerUserStatus">مستوى A1 مخصص</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-down" style="font-size: 0.75rem; color: var(--text-secondary);"></i>
                     </div>
-                    <i class="fa-solid fa-chevron-down" style="font-size: 0.75rem; color: var(--text-secondary);"></i>
+
+                    <div class="user-dropdown-menu" id="userDropdownMenu">
+                        <div class="dropdown-header">اختر الحساب النشط:</div>
+                        <div class="user-dropdown-item" id="item-user-mohamed" onclick="switchUser('mohamed')">
+                            <div class="avatar-circle sm" style="background: linear-gradient(135deg, #ec4899, #3b82f6);">م</div>
+                            <div class="user-dropdown-info">
+                                <span class="user-dropdown-name">محمد أحمد</span>
+                                <span class="user-dropdown-sub" id="sub-mohamed">مستوى A1</span>
+                            </div>
+                        </div>
+                        <div class="user-dropdown-item" id="item-user-assem" onclick="switchUser('assem')">
+                            <div class="avatar-circle sm" style="background: linear-gradient(135deg, #10b981, #3b82f6);">ع</div>
+                            <div class="user-dropdown-info">
+                                <span class="user-dropdown-name">عاصم أحمد</span>
+                                <span class="user-dropdown-sub" id="sub-assem">مستوى A1</span>
+                            </div>
+                        </div>
+                        <div class="user-dropdown-item" id="item-user-omar" onclick="switchUser('omar')">
+                            <div class="avatar-circle sm" style="background: linear-gradient(135deg, #f59e0b, #ec4899);">ع</div>
+                            <div class="user-dropdown-info">
+                                <span class="user-dropdown-name">عمر مهند</span>
+                                <span class="user-dropdown-sub" id="sub-omar">مستوى A1</span>
+                            </div>
+                        </div>
+                        <div class="user-dropdown-divider"></div>
+                        <div class="user-dropdown-item settings-item" onclick="openWizardModal()">
+                            <i class="fa-solid fa-sliders" style="color: var(--border-highlight); margin-left: 6px;"></i>
+                            <span>تخصيص الإعدادات والأيام</span>
+                        </div>
+                    </div>
                 </div>
 
                 <button class="btn-header-action" onclick="toggleNotificationsPermission()">
@@ -1007,13 +1117,13 @@
             <div class="form-group">
                 <label>أيام المذاكرة الأسبوعية:</label>
                 <div class="days-checkboxes" id="daysContainer">
-                    <div class="day-chip active" onclick="toggleDayChip(this)">السبت</div>
-                    <div class="day-chip active" onclick="toggleDayChip(this)">الأحد</div>
-                    <div class="day-chip active" onclick="toggleDayChip(this)">الإثنين</div>
-                    <div class="day-chip active" onclick="toggleDayChip(this)">الثلاثاء</div>
-                    <div class="day-chip active" onclick="toggleDayChip(this)">الأربعاء</div>
-                    <div class="day-chip active" onclick="toggleDayChip(this)">الخميس</div>
-                    <div class="day-chip active" onclick="toggleDayChip(this)">الجمعة</div>
+                    <div class="day-chip active" data-day="6" onclick="toggleDayChip(this)">السبت</div>
+                    <div class="day-chip active" data-day="0" onclick="toggleDayChip(this)">الأحد</div>
+                    <div class="day-chip active" data-day="1" onclick="toggleDayChip(this)">الإثنين</div>
+                    <div class="day-chip active" data-day="2" onclick="toggleDayChip(this)">الثلاثاء</div>
+                    <div class="day-chip active" data-day="3" onclick="toggleDayChip(this)">الأربعاء</div>
+                    <div class="day-chip active" data-day="4" onclick="toggleDayChip(this)">الخميس</div>
+                    <div class="day-chip active" data-day="5" onclick="toggleDayChip(this)">الجمعة</div>
                 </div>
             </div>
 
@@ -2491,28 +2601,86 @@
   ]
 };
 
-        // Global App State
-        let state = {
-            userKey: 'mohamed',
-            activeLevel: 'A1',
-            studyDays: [6, 0, 1, 2, 3, 4, 5],
-            dailyMinutesTarget: 45,
-            notifyTime: '21:00',
-            completedVideos: {}
+        // Global Per-User App State Storage
+        const DEFAULT_USER_SETTINGS = {
+            mohamed: {
+                activeLevel: 'A1',
+                studyDays: [6, 0, 1, 2, 3, 4, 5],
+                dailyMinutesTarget: 45,
+                notifyTime: '21:00',
+                completedVideos: {}
+            },
+            assem: {
+                activeLevel: 'A1',
+                studyDays: [6, 0, 1, 2, 3, 4, 5],
+                dailyMinutesTarget: 45,
+                notifyTime: '21:00',
+                completedVideos: {}
+            },
+            omar: {
+                activeLevel: 'A1',
+                studyDays: [6, 0, 1, 2, 3, 4, 5],
+                dailyMinutesTarget: 45,
+                notifyTime: '21:00',
+                completedVideos: {}
+            }
+        };
+
+        let appData = {
+            activeUser: 'mohamed',
+            users: JSON.parse(JSON.stringify(DEFAULT_USER_SETTINGS))
         };
 
         function loadStateFromStorage() {
-            const saved = localStorage.getItem('german_planner_state');
-            if (saved) {
+            const savedNew = localStorage.getItem('german_planner_app_data_v2');
+            if (savedNew) {
                 try {
-                    state = { ...state, ...JSON.parse(saved) };
-                } catch(e) { console.error(e); }
+                    const parsed = JSON.parse(savedNew);
+                    if (parsed.activeUser) appData.activeUser = parsed.activeUser;
+                    if (parsed.users) {
+                        ['mohamed', 'assem', 'omar'].forEach(key => {
+                            if (parsed.users[key]) {
+                                appData.users[key] = {
+                                    ...DEFAULT_USER_SETTINGS[key],
+                                    ...parsed.users[key]
+                                };
+                            }
+                        });
+                    }
+                    return;
+                } catch(e) { console.error('Error parsing german_planner_app_data_v2:', e); }
+            }
+
+            // Legacy migration from old german_planner_state
+            const savedOld = localStorage.getItem('german_planner_state');
+            if (savedOld) {
+                try {
+                    const oldState = JSON.parse(savedOld);
+                    const userKey = oldState.userKey || 'mohamed';
+                    appData.activeUser = userKey;
+                    if (!appData.users[userKey]) {
+                        appData.users[userKey] = JSON.parse(JSON.stringify(DEFAULT_USER_SETTINGS[userKey] || DEFAULT_USER_SETTINGS.mohamed));
+                    }
+                    appData.users[userKey].activeLevel = oldState.activeLevel || 'A1';
+                    appData.users[userKey].studyDays = oldState.studyDays || [6, 0, 1, 2, 3, 4, 5];
+                    appData.users[userKey].dailyMinutesTarget = oldState.dailyMinutesTarget || 45;
+                    appData.users[userKey].notifyTime = oldState.notifyTime || '21:00';
+                    appData.users[userKey].completedVideos = oldState.completedVideos || {};
+                    saveAppDataToStorage();
+                } catch(e) { console.error('Error migrating old state:', e); }
             }
         }
 
-        function saveStateToStorage() {
-            localStorage.setItem('german_planner_state', JSON.stringify(state));
+        function saveAppDataToStorage() {
+            localStorage.setItem('german_planner_app_data_v2', JSON.stringify(appData));
             localStorage.setItem('german_planner_installed', 'true');
+        }
+
+        function getCurrentUserState() {
+            if (!appData.users[appData.activeUser]) {
+                appData.users[appData.activeUser] = JSON.parse(JSON.stringify(DEFAULT_USER_SETTINGS[appData.activeUser] || DEFAULT_USER_SETTINGS.mohamed));
+            }
+            return appData.users[appData.activeUser];
         }
 
         function getUserName(key) {
@@ -2521,78 +2689,145 @@
             return 'عمر مهند';
         }
 
-        function renderApp() {
-            document.getElementById('headerUserName').textContent = getUserName(state.userKey);
-            document.getElementById('userAvatarCircle').textContent = getUserName(state.userKey).charAt(0);
-            document.getElementById('headerUserStatus').textContent = `خطة ${state.activeLevel} المخصصة`;
+        function isVideoCompleted(userKey, level, videoNum) {
+            const uState = appData.users[userKey];
+            if (!uState || !uState.completedVideos) return false;
+            const keyNew = `${level}_${videoNum}`;
+            const keyOld = `${userKey}_${level}_${videoNum}`;
+            return !!(uState.completedVideos[keyNew] || uState.completedVideos[keyOld]);
+        }
 
+        function switchUser(userKey) {
+            if (!appData.users[userKey]) return;
+            appData.activeUser = userKey;
+            saveAppDataToStorage();
+            closeUserDropdown();
+            renderApp();
+            showToast(`تم التبديل إلى حساب ${getUserName(userKey)} 👍`);
+        }
+
+        function toggleUserDropdown(e) {
+            if (e) e.stopPropagation();
+            const dropdown = document.getElementById('userDropdownMenu');
+            if (dropdown) dropdown.classList.toggle('show');
+        }
+
+        function closeUserDropdown() {
+            const dropdown = document.getElementById('userDropdownMenu');
+            if (dropdown) dropdown.classList.remove('show');
+        }
+
+        document.addEventListener('click', (e) => {
+            const wrapper = document.querySelector('.user-dropdown-wrapper');
+            if (wrapper && !wrapper.contains(e.target)) {
+                closeUserDropdown();
+            }
+        });
+
+        function renderApp() {
+            const userKey = appData.activeUser;
+            const uState = getCurrentUserState();
+            const activeLevel = uState.activeLevel || 'A1';
+
+            // Update Header user display
+            document.getElementById('headerUserName').textContent = getUserName(userKey);
+            document.getElementById('userAvatarCircle').textContent = getUserName(userKey).charAt(0);
+            document.getElementById('headerUserStatus').textContent = `خطة ${activeLevel} المخصصة`;
+
+            // Update Dropdown active states & subtitle text
+            ['mohamed', 'assem', 'omar'].forEach(k => {
+                const item = document.getElementById(`item-user-${k}`);
+                const sub = document.getElementById(`sub-${k}`);
+                if (item) {
+                    item.classList.toggle('active', k === userKey);
+                }
+                if (sub && appData.users[k]) {
+                    const uDaysCount = appData.users[k].studyDays ? appData.users[k].studyDays.length : 7;
+                    sub.textContent = `مستوى ${appData.users[k].activeLevel || 'A1'} (${uDaysCount} أيام/أسبوع)`;
+                }
+            });
+
+            // Update Level Tabs active class
             document.querySelectorAll('.level-tab-btn').forEach(btn => {
                 btn.classList.remove('active');
-                if (btn.classList.contains(state.activeLevel.toLowerCase())) {
+                if (btn.classList.contains(activeLevel.toLowerCase())) {
                     btn.classList.add('active');
                 }
             });
 
-            const allLevelVideos = buildFullPlaylistVideos(state.activeLevel);
+            const allLevelVideos = buildFullPlaylistVideos(activeLevel);
             let userRequiredVideos = allLevelVideos;
 
-            if (state.activeLevel === 'A1') {
-                const missingNumbers = USER_A1_MISSING_VIDEOS[state.userKey] || generateRange(1, 96);
+            if (activeLevel === 'A1') {
+                const missingNumbers = USER_A1_MISSING_VIDEOS[userKey] || generateRange(1, 96);
                 userRequiredVideos = allLevelVideos.filter(v => missingNumbers.includes(v.num));
             }
 
             let completedCount = 0;
             userRequiredVideos.forEach(v => {
-                const key = `${state.userKey}_${state.activeLevel}_${v.num}`;
-                if (state.completedVideos[key]) completedCount++;
+                if (isVideoCompleted(userKey, activeLevel, v.num)) completedCount++;
             });
 
             const totalRequired = userRequiredVideos.length;
             const remainingCount = totalRequired - completedCount;
             const percent = totalRequired > 0 ? Math.round((completedCount / totalRequired) * 100) : 0;
 
-            document.getElementById('sidebarLevelBadge').textContent = state.activeLevel;
+            document.getElementById('sidebarLevelBadge').textContent = activeLevel;
             document.getElementById('progressPercentText').textContent = `${percent}%`;
             document.getElementById('progressBarFill').style.width = `${percent}%`;
             document.getElementById('statCompletedCount').textContent = completedCount;
             document.getElementById('statRemainingCount').textContent = remainingCount;
-            document.getElementById('statDailyTargetMin').textContent = `${state.dailyMinutesTarget} م`;
-            
+            document.getElementById('statDailyTargetMin').textContent = `${uState.dailyMinutesTarget || 45} م`;
+
             const totalRemainingMinutes = userRequiredVideos
-                .filter(v => !state.completedVideos[`${state.userKey}_${state.activeLevel}_${v.num}`])
+                .filter(v => !isVideoCompleted(userKey, activeLevel, v.num))
                 .reduce((acc, v) => acc + v.duration, 0);
-            const estimatedDays = Math.ceil(totalRemainingMinutes / state.dailyMinutesTarget);
-            document.getElementById('statDaysEstimate').textContent = `${estimatedDays} أيام`;
+
+            const dailyTarget = uState.dailyMinutesTarget || 45;
+            const daysNeeded = Math.ceil(totalRemainingMinutes / dailyTarget);
+            const studyDaysCount = (uState.studyDays && uState.studyDays.length > 0) ? uState.studyDays.length : 7;
+
+            if (studyDaysCount === 7) {
+                document.getElementById('statDaysEstimate').textContent = `${daysNeeded} أيام`;
+            } else {
+                const weeksNeeded = Math.ceil(daysNeeded / studyDaysCount);
+                document.getElementById('statDaysEstimate').textContent = `${daysNeeded} أيام مذاكرة (~${weeksNeeded} أسابيع)`;
+            }
 
             renderTodaySchedule(userRequiredVideos);
             renderAllLessons(userRequiredVideos);
         }
 
         function selectLevel(level) {
-            state.activeLevel = level;
-            saveStateToStorage();
+            const uState = getCurrentUserState();
+            uState.activeLevel = level;
+            saveAppDataToStorage();
             renderApp();
         }
 
         function renderTodaySchedule(requiredVideos) {
             const container = document.getElementById('todayVideosContainer');
             container.innerHTML = '';
+            const userKey = appData.activeUser;
+            const uState = getCurrentUserState();
+            const activeLevel = uState.activeLevel || 'A1';
 
-            const uncompleted = requiredVideos.filter(v => {
-                const key = `${state.userKey}_${state.activeLevel}_${v.num}`;
-                return !state.completedVideos[key];
-            });
+            const uncompleted = requiredVideos.filter(v => !isVideoCompleted(userKey, activeLevel, v.num));
 
             if (uncompleted.length === 0) {
                 container.innerHTML = `
                     <div style="grid-column: 1/-1; text-align: center; padding: 24px; color: var(--level-b1); font-weight:700;">
                         <i class="fa-solid fa-trophy" style="font-size:2.5rem; margin-bottom:10px; display:block;"></i>
-                        أحسنت صنعاً! لقد أكملت جميع الدروس المطلوبة في هذا المستوى (${state.activeLevel})! 🎉
+                        أحسنت صنعاً! لقد أكملت جميع الدروس المطلوبة في هذا المستوى (${activeLevel})! 🎉
                     </div>
                 `;
                 document.getElementById('todayTotalDurationLabel').textContent = '0 دقيقة';
                 return;
             }
+
+            const todayDayNum = new Date().getDay(); // 0=Sun, 1=Mon, 2=Tue, 3=Wed, 4=Thu, 5=Fri, 6=Sat
+            const isStudyDay = uState.studyDays ? uState.studyDays.includes(todayDayNum) : true;
+            const dayNames = { 6: 'السبت', 0: 'الأحد', 1: 'الإثنين', 2: 'الثلاثاء', 3: 'الأربعاء', 4: 'الخميس', 5: 'الجمعة' };
 
             const todayBatch = [];
             let totalMins = 0;
@@ -2600,13 +2835,20 @@
             for (let v of uncompleted) {
                 todayBatch.push(v);
                 totalMins += v.duration;
-                if (totalMins >= state.dailyMinutesTarget) break;
+                if (totalMins >= (uState.dailyMinutesTarget || 45)) break;
             }
 
             document.getElementById('todayTotalDurationLabel').textContent = `${totalMins} دقيقة اليوم`;
 
+            if (!isStudyDay) {
+                const restNote = document.createElement('div');
+                restNote.style.cssText = 'grid-column: 1/-1; background: rgba(59, 130, 246, 0.1); border: 1px solid var(--border-highlight); border-radius: var(--radius-md); padding: 16px; margin-bottom: 12px; color: #93c5fd; font-size: 0.9rem; font-weight: 600; text-align: center;';
+                restNote.innerHTML = `<i class="fa-solid fa-mug-hot" style="margin-left:8px; font-size:1.1rem;"></i> اليوم (${dayNames[todayDayNum]}) هو يوم عطلة مخصص في جدولك! يمكنك أخذ استراحة أو متابعة الدروس التالية أدناه إن أردت.`;
+                container.appendChild(restNote);
+            }
+
             todayBatch.forEach(video => {
-                const isDone = !!state.completedVideos[`${state.userKey}_${state.activeLevel}_${video.num}`];
+                const isDone = isVideoCompleted(userKey, activeLevel, video.num);
                 const card = createVideoCardHTML(video, isDone);
                 container.appendChild(card);
             });
@@ -2623,12 +2865,15 @@
             const query = (document.getElementById('searchInput').value || '').toLowerCase();
             const container = document.getElementById('allLessonsContainer');
             container.innerHTML = '';
+            const userKey = appData.activeUser;
+            const uState = getCurrentUserState();
+            const activeLevel = uState.activeLevel || 'A1';
 
             const filtered = cachedCurrentVideos.filter(v => v.title.toLowerCase().includes(query) || v.num.toString().includes(query));
             document.getElementById('allLessonsCountLabel').textContent = filtered.length;
 
             filtered.forEach(video => {
-                const isDone = !!state.completedVideos[`${state.userKey}_${state.activeLevel}_${video.num}`];
+                const isDone = isVideoCompleted(userKey, activeLevel, video.num);
                 const card = createVideoCardHTML(video, isDone);
                 container.appendChild(card);
             });
@@ -2700,12 +2945,19 @@
         }
 
         function toggleComplete(level, videoNum) {
-            const key = `${state.userKey}_${level}_${videoNum}`;
-            state.completedVideos[key] = !state.completedVideos[key];
-            saveStateToStorage();
+            const uState = getCurrentUserState();
+            if (!uState.completedVideos) uState.completedVideos = {};
+            const key = `${level}_${videoNum}`;
+            const keyOld = `${appData.activeUser}_${level}_${videoNum}`;
+
+            const currentState = !!(uState.completedVideos[key] || uState.completedVideos[keyOld]);
+            uState.completedVideos[key] = !currentState;
+            if (uState.completedVideos[keyOld]) delete uState.completedVideos[keyOld];
+
+            saveAppDataToStorage();
             renderApp();
 
-            if (state.completedVideos[key]) {
+            if (uState.completedVideos[key]) {
                 showToast(`تم إنجاز الدرس #${videoNum}! 👍`);
             }
         }
@@ -2732,18 +2984,32 @@
         let wizardTempUser = 'mohamed';
 
         function openWizardModal() {
-            wizardTempUser = state.userKey;
-            document.querySelectorAll('.user-option-card').forEach(el => el.classList.remove('selected'));
-            document.getElementById(`opt-${wizardTempUser}`)?.classList.add('selected');
-            document.getElementById('dailyMinutesInput').value = state.dailyMinutesTarget;
-            document.getElementById('notifyTimeInput').value = state.notifyTime;
+            wizardTempUser = appData.activeUser;
+            selectUserInWizard(wizardTempUser);
             document.getElementById('wizardModal').style.display = 'flex';
         }
 
         function selectUserInWizard(userKey) {
             wizardTempUser = userKey;
             document.querySelectorAll('.user-option-card').forEach(el => el.classList.remove('selected'));
-            document.getElementById(`opt-${userKey}`).classList.add('selected');
+            document.getElementById(`opt-${userKey}`)?.classList.add('selected');
+            updateWizardFieldsForUser(userKey);
+        }
+
+        function updateWizardFieldsForUser(userKey) {
+            const uState = appData.users[userKey] || DEFAULT_USER_SETTINGS[userKey] || DEFAULT_USER_SETTINGS.mohamed;
+            document.getElementById('dailyMinutesInput').value = uState.dailyMinutesTarget || 45;
+            document.getElementById('notifyTimeInput').value = uState.notifyTime || '21:00';
+
+            const studyDays = uState.studyDays || [6, 0, 1, 2, 3, 4, 5];
+            document.querySelectorAll('#daysContainer .day-chip').forEach(chip => {
+                const dayNum = parseInt(chip.getAttribute('data-day'));
+                if (studyDays.includes(dayNum)) {
+                    chip.classList.add('active');
+                } else {
+                    chip.classList.remove('active');
+                }
+            });
         }
 
         function toggleDayChip(chipEl) {
@@ -2751,13 +3017,32 @@
         }
 
         function saveWizardSettings() {
-            state.userKey = wizardTempUser;
-            state.dailyMinutesTarget = parseInt(document.getElementById('dailyMinutesInput').value) || 45;
-            state.notifyTime = document.getElementById('notifyTimeInput').value || '21:00';
-            saveStateToStorage();
+            appData.activeUser = wizardTempUser;
+
+            const activeDays = [];
+            document.querySelectorAll('#daysContainer .day-chip.active').forEach(chip => {
+                const d = parseInt(chip.getAttribute('data-day'));
+                if (!isNaN(d)) activeDays.push(d);
+            });
+
+            if (activeDays.length === 0) {
+                showToast('يرجى تحديد يوم واحد على الأقل للمذاكرة!', 'fa-exclamation-triangle');
+                return;
+            }
+
+            if (!appData.users[wizardTempUser]) {
+                appData.users[wizardTempUser] = JSON.parse(JSON.stringify(DEFAULT_USER_SETTINGS[wizardTempUser] || DEFAULT_USER_SETTINGS.mohamed));
+            }
+
+            appData.users[wizardTempUser].studyDays = activeDays;
+            appData.users[wizardTempUser].dailyMinutesTarget = parseInt(document.getElementById('dailyMinutesInput').value) || 45;
+            appData.users[wizardTempUser].notifyTime = document.getElementById('notifyTimeInput').value || '21:00';
+
+            saveAppDataToStorage();
             document.getElementById('wizardModal').style.display = 'none';
-            showToast(`تم حفظ خطة ${getUserName(state.userKey)} بنجاح!`);
+            closeUserDropdown();
             renderApp();
+            showToast(`تم حفظ وتطبيق إعدادات ${getUserName(wizardTempUser)} بنجاح! 🎉`);
         }
 
         function toggleNotificationsPermission() {
@@ -2778,9 +3063,12 @@
                 const now = new Date();
                 const hours = String(now.getHours()).padStart(2, '0');
                 const mins = String(now.getMinutes()).padStart(2, '0');
-                if (`${hours}:${mins}` === state.notifyTime) {
+                const currentTime = `${hours}:${mins}`;
+
+                const uState = getCurrentUserState();
+                if (currentTime === uState.notifyTime) {
                     new Notification("منظم الألماني الذكي 🇩🇪", {
-                        body: `حان وقت جلسة المذاكرة اليومية لـ ${getUserName(state.userKey)}!`,
+                        body: `حان وقت جلسة المذاكرة اليومية لـ ${getUserName(appData.activeUser)}!`,
                         icon: "https://cdn-icons-png.flaticon.com/512/2991/2991148.png"
                     });
                 }
